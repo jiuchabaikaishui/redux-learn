@@ -3,16 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@faker-js/faker": "^8",
+    "@mswjs/data": "^0.16",
     "@reduxjs/toolkit": "^2.8.2",
+    "classnames": "^2.2.6",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "date-fns": "^4.1.0",
+    "mock-socket": "^9.0.3",
+    "msw": "^2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
+    "react-router-dom": "^7.6.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "react-tiny-toast": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

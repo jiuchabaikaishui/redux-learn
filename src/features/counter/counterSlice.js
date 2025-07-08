@@ -54,8 +54,9 @@ export const incrementIfOdd = (amount) => (dispatch, getState) => {
     }
 }
 
-console.log(counterSlice.actions.increment());
+// console.log(counterSlice.actions.increment());
 // {type: 'counter/increment', payload: undefined}
-const newState = counterSlice.reducer({value: 10}, counterSlice.actions.increment)
-console.log(newState);
+
+// const newState = counterSlice.reducer({value: 10}, counterSlice.actions.increment)
+// console.log(newState);
 // {value: 11}

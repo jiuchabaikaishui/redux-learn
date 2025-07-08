@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  margin-right: 5px;
+}
+
+button {
+  margin: 5px;
+}
+
+.notification {
+  border-radius: 8px;
+  border: 1px lightgray solid;
+  padding: 12px;
+  margin: 8px;
+}
+.new {
+  background-color: skyblue;
+}
+
+.badge {
+  color: red;
+}

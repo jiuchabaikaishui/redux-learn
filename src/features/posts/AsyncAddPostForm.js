@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postAdded } from "./postsSlice";
-// import { selectAllUsers } from "../users/usersSlice";
-import { selectCurrentUsername } from "../auth/authSlice";
+// import { selectAllUsers } from "../users/asyncUsersSlice";
+import { selectCurrentUsername } from "../auth/asyncAuthSlice";
+import { addNewPost } from "./asyncPostsSlice";
+import { useState } from "react";
 
 export default function AddPostForm() {
     const dispatch = useDispatch()
     // const users = useSelector(selectAllUsers)
     const currentUsername = useSelector(selectCurrentUsername)
 
-    const handleSubmit = (e) => {
+    const [addRequestStatus, setAddRequestStatus] = useState('idle')
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         console.log('e: ', e);
@@ -16,9 +19,15 @@ export default function AddPostForm() {
         const title = elements.postTitle.value
         const content = elements.postContent.value
         // const userId = elements.postAuthor.value
-        dispatch(postAdded(title, content, currentUsername))
-        
-        e.target.reset()
+        try {
+            setAddRequestStatus('pending')
+            await dispatch(addNewPost({title, content, user: currentUsername})).unwrap()
+            e.target.reset()
+        } catch (error) {
+            console.error('Failed to save the post: ', error)
+        } finally {
+            setAddRequestStatus('idle')
+        }
     }
 
     // const usersOptions = users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)
@@ -32,12 +41,12 @@ export default function AddPostForm() {
             <select id="postAuthor" required>
                 <option value=''></option>
                 {usersOptions}
-            </select>
-            <br></br> */}
+            </select> */}
+            <br></br>
             <label htmlFor="postContent">Post Content: </label>
             <textarea id="postContent" name="postContent" required></textarea>
             <br></br>
-            <button>Save Post</button>
+            <button disabled={addRequestStatus !== 'idle'}>Save Post</button>
         </form>
     </section>)
 }

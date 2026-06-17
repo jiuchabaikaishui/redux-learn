@@ -5,11 +5,13 @@ import postsReducer from "../features/posts/postsSlice";
 import usersReducer from "../features/users/usersSlice"
 import authReducer from "../features/auth/authSlice"
 import asyncPostsReducer from "../features/posts/asyncPostsSlice";
-import asyncUsersReducer from "../features/users/asyncUsersSlice";
+// import asyncUsersReducer from "../features/users/asyncUsersSlice";
 import asyncAuthReducer from "../features/auth/asyncAuthSlice";
-import notificationsReducer from "../features/notifications/notificationsClice";
+import notificationsReducer from "../features/notifications/notificationsSlice";
 
 import { listenerMiddleware } from "./listenerMiddleware";
+
+import { apiSlice } from "../features/api/apiSlice";
 
 export default configureStore({
     reducer: {
@@ -17,12 +19,15 @@ export default configureStore({
         posts: postsReducer,
         users: usersReducer,
         auth: authReducer,
-        asyncPosts: asyncPostsReducer,
-        asyncUsers: asyncUsersReducer,
+        // asyncPosts: asyncPostsReducer,
+        // asyncUsers: asyncUsersReducer,
         asyncAuth: asyncAuthReducer,
-        notifications: notificationsReducer
+        notifications: notificationsReducer,
+        [apiSlice.reducerPath]: apiSlice.reducer
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(listenerMiddleware.middleware)
+    middleware: getDefaultMiddleware => getDefaultMiddleware()
+    .prepend(listenerMiddleware.middleware)
+    .concat(apiSlice.middleware)
 })
 
 // const store = configureStore({

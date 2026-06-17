@@ -11,10 +11,13 @@ const EditPostForm = React.lazy(() => import('./features/posts/EditPostForm'))
 const LoginPage = React.lazy(() => import('./features/auth/LoginPage'))
 const AsyncPostsList = React.lazy(() => import('./features/posts/AsyncPostsList'))
 const AsyncAddPostForm = React.lazy(() => import('./features/posts/AsyncAddPostForm'))
+const AsyncSinglePostPage = React.lazy(() => import('./features/posts/AsyncSinglePostPage'))
 const AsyncUsersList = React.lazy(() => import('./features/users/AsyncUsersList'))
 const AsyncUserPage = React.lazy(() => import('./features/users/AsyncUserPage'))
 const AsyncLoginPage = React.lazy(() => import('./features/auth/AsyncLoginPage'))
 const NotificationsList = React.lazy(() => import('./features/notifications/NotificationsList'))
+
+const QueryEditPostForm = React.lazy(() => import('./features/posts/QueryEditPostForm'))
 
 
 // 数据
@@ -66,12 +69,28 @@ const data = [
   },
   {
     path: '/async/postsList',
-    title: '异步数据帖子列表示例',
+    title: '异步帖子列表示例',
     element: (<AsyncProtectedRoute>
         <AsyncAddPostForm></AsyncAddPostForm>
         <AsyncPostsList></AsyncPostsList>
     </AsyncProtectedRoute>),
     showHome: true
+  },
+  {
+    path: '/async/posts/:postId',
+    title: '异步帖子详情示例',
+    element: (<AsyncProtectedRoute>
+        <AsyncSinglePostPage></AsyncSinglePostPage>
+    </AsyncProtectedRoute>),
+    showHome: false
+  },
+  {
+    path: '/async/editPost/:postId',
+    title: '异步编辑帖子示例',
+    element: (<AsyncProtectedRoute>
+        <QueryEditPostForm></QueryEditPostForm>
+    </AsyncProtectedRoute>),
+    showHome: false
   },
   {
     path: '/async/users',

@@ -8,10 +8,14 @@ export default function LoginPage() {
     const dispatch = useDispatch()
     const users = useSelector(selectAllUsers)
 
+    console.log('LoginPage users: ', users);
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const username = e.target.elements.username.value
+        console.log('async login username：', username);
         await dispatch(login(username))
 
         navigate('/async/postsList')

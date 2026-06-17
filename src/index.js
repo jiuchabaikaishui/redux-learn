@@ -7,12 +7,17 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { worker } from "./api/server";
-import { fetchUsers } from "./features/users/asyncUsersSlice";
+// import { fetchUsers } from "./features/users/asyncUsersSlice";
+import { apiSliceWithUsers } from "./features/users/asyncUsersSlice";
+
+import { apiSlice } from "./features/api/apiSlice";
 
 async function mockStart() {
   await worker.start({ onUnhandledRequest: 'bypass' })
 
-  store.dispatch(fetchUsers())
+  store.dispatch(apiSliceWithUsers.endpoints.getUsers.initiate())
+  // store.dispatch(apiSlice.endpoints.getUsers.initiate())
+  // store.dispatch(fetchUsers())
 
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(

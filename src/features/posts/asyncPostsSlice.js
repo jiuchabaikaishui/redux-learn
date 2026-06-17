@@ -2,9 +2,12 @@ import { createSlice, createAsyncThunk, createSelector, createEntityAdapter } fr
 import { logout } from "../auth/asyncAuthSlice";
 import { client } from "../../api/client";
 
+import { apiSlice } from "../../features/api/apiSlice";
+
 export const addPostsListeners = (startListening) => {
     startListening({
-        actionCreator: addNewPost.fulfilled,
+        // actionCreator: addNewPost.fulfilled,
+        matcher: apiSlice.endpoints.addNewPost.matchFulfilled,
         effect: async (action, listenerApi) => {
             const {toast} = await import('react-tiny-toast')
             console.log('toast: ', toast);
